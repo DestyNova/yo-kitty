@@ -1,23 +1,44 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
+<script type="text/ng-template" id="zoomAnimation.html">
+<div class="modal-header">
+            <h3 class="modal-title">Result</h3>
+        </div>
+        <div class="modal-body">
+          <center>
+            <img ng-src="{{imageUrl}}" /><br>
+          </center>
+          <div class="form-group">
+            <input type="text" class="form-control" disabled="true" ng-model="pageUrl">
+          </div>
+        </div>
+</script>
+
+<div class="header">
+  <h1>Cute Animals</h1>
 </div>
 
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
+<div class="row">
+  <div class="btn-group">
+    <label class="btn btn-primary" ng-model="subject" ng-change="search()" uib-btn-radio="'kittens'">Kittens</label>
+    <label class="btn btn-primary" ng-model="subject" ng-change="search()" uib-btn-radio="'puppies'">Puppies</label>
+  </div>
+</div>
 
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
+<div class="row" ng-if="results.length == 0">
+  Searching...
+</div>
 
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
+<div class="row" style="margin-top: 4px" ng-repeat="row in results">
+  <div class="col-md-1"></div>
+
+  <div class="col-md-2" ng-repeat="result in row">
+    <img ng-click="showLarge(result)" ng-src="{{result.images.fixed_width_small.url}}" />
+  </div>
+
+  <div class="col-md-1"></div>
+</div>
+
+<div class="row">
+  <center>
+    <uib-pagination boundary-links="true" total-items="total" ng-model="page" max-size="8" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" boundary-link-numbers="true" rotate="false" ng-change="search()"></uib-pagination>
+  </center>
 </div>
